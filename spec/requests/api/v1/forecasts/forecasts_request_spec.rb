@@ -7,6 +7,8 @@ RSpec.describe 'Forecast API' do
     expect(response).to be_successful
     forecast = JSON.parse(response.body, symbolize_names: true)
 
+    binding.pry
+
     expect(forecast).to have_key(:data)
 
     expect(forecast[:data][:id]).to eq(null)

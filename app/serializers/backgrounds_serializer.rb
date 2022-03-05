@@ -1,0 +1,4 @@
+class BackgroundsSerializer
+
+
+end
