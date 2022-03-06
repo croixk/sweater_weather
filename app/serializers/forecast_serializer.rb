@@ -2,7 +2,6 @@ class ForecastSerializer
   include JSONAPI::Serializer
 
   def self.forecast(data)
-    binding.pry
     hash = {
       data:{
         id: nil,
@@ -20,22 +19,25 @@ class ForecastSerializer
             conditions: data[:current][:weather][0][:description],
             icon: data[:current][:weather][0][:icon]
           },
-          daily_weather:{
-            date: data[:daily][:dt],
-            sunrise: data[:daily][:sunrise],
-            sunset: data[:daily][:sunset],
-            sunset: data[:daily][:sunset],
-            max_temp: data[:daily][:max_temp],
-            min_temp: data[:daily][:min_temp],
-            conditions: data[:daily][:conditions],
-            icon: data[:daily][:icon]
-          },
-          hourly_weather:{
-            time: data[:hourly][:time],
-            temperature: data[:hourly][:temperature],
-            conditions: data[:hourly][:conditions],
-            icon: data[:hourly][:icon]
-          }
+          daily_weather: data[:daily].shift(5).map do |day|
+            {
+              date: day[:dt],
+              sunrise: day[:sunrise],
+              sunset: day[:sunset],
+              max_temp: day[:temp][:max],
+              min_temp: day[:temp][:min],
+              conditions: day[:conditions],
+              icon: day[:icon]
+            }
+            end,
+          hourly_weather: data[:hourly].shift(8).map do |hour|
+            {
+              time: Time.at(hour[:dt]),
+              temperature: hour[:temp],
+              conditions: hour[:weather][0][:description],
+              icon: hour[:weather][0][:icon]
+            }
+            end,
         }
       }
     }
