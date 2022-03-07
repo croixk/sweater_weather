@@ -13,14 +13,13 @@ class BooksSerializer
             "temperature": weather[:temp]
           },
           "total_books_found": total_books_found,
-          "books": [ books.map do |book|
+          "books": books.map do |book|
               {
                 "isbn": book.isbn,
                 "title": book.title,
                 "publisher": book.publisher
               }
-          end
-        ]
+          end,
         }
       }
     }
