@@ -9,6 +9,6 @@ class Api::V1::BooksController < ApplicationController
     books = BookFacade.get_books(location, book_quantity)
     total_books_found = books[0].total_books_found
 
-    render json: BooksSerializer.return_books(weather, books, total_books_found)
+    render json: BooksSerializer.return_books(location, weather, books, total_books_found)
   end
 end
