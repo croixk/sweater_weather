@@ -8,7 +8,8 @@ class Api::V1::BooksController < ApplicationController
     weather = WeatherFacade.get_weather(coordinates[:lat], coordinates[:lng])
     ### Add books facade call - include quantity
     books = BookFacade.get_books(query, book_quantity)
-
+    total_books_found = books[0].total_books_found
+    binding.pry
 
     render json: ForecastSerializer.forecast(weather, books)
   end
