@@ -10,7 +10,7 @@ class BooksSerializer
           "destination": location,
           "forecast": {
             "summary": weather[:current][:weather][0][:description],
-            "temperature": weather[:temp]
+            "temperature": ((weather[:current][:temp]-273.15)*9/5+32).to_i.to_s + " F"
           },
           "total_books_found": total_books_found,
           "books": books.map do |book|
