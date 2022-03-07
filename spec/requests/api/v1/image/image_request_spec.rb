@@ -6,8 +6,19 @@ RSpec.describe 'Image API' do
 
     expect(response).to be_successful
     image_data = JSON.parse(response.body, symbolize_names: true)
-    binding.pry
-    # forecast = JSON.parse(response.body, symbolize_names: true)
+    expect(image_data).to be_a(Hash)
+    expect(image_data[:data]).to have_key(:type)
+    expect(image_data[:data]).to have_key(:id)
+    expect(image_data[:data]).to have_key(:attributes)
+    expect(image_data[:data][:attributes]).to have_key(:image)
+    expect(image_data[:data][:attributes][:image]).to have_key(:location)
+    expect(image_data[:data][:attributes][:image]).to have_key(:image_url)
+    expect(image_data[:data][:attributes][:image]).to have_key(:credit)
+    expect(image_data[:data][:attributes][:image][:credit]).to have_key(:photographer)
+    expect(image_data[:data][:attributes][:image][:credit]).to have_key(:photographer_url)
+    expect(image_data[:data][:attributes][:image][:credit]).to have_key(:photographer_id)
+
+
 
   end
 end
