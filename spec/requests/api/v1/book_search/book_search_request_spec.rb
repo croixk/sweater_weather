@@ -24,7 +24,5 @@ RSpec.describe 'Book search' do
     expect(data[:attributes][:books][0]).to have_key(:title)
     expect(data[:attributes][:books][0]).to have_key(:publisher)
 
-
-
   end
 end
