@@ -6,7 +6,6 @@ RSpec.describe 'Book search' do
 
     expect(response).to be_successful
     data = JSON.parse(response.body, symbolize_names: true)
-    binding.pry
     expect(data).to be_a(Hash)
     expect(data).to have_key(:data)
     expect(data[:data]).to be_a(Hash)
