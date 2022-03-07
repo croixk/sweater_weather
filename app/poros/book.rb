@@ -1,5 +1,5 @@
 class Book
-  attr_reader :isbn, :title, :publisher
+  attr_reader :isbn, :title, :publisher, :total_books_found
 
   def initialize(book_data, total_books_found)
     @isbn = book_data[:isbn]
