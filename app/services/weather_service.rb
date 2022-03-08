@@ -6,7 +6,8 @@ class WeatherService
   end
 
   def self.get_weather(lat, long)
-    response = conn.get("/data/2.5/onecall?lat=#{lat}&lon=#{long}&exclude=minutely,alerts")
+      response = conn.get("/data/2.5/onecall?lat=#{lat}&lon=#{long}&exclude=minutely,alerts") do |faraday|
+    end
     JSON.parse(response.body, symbolize_names: true)
   end
 end

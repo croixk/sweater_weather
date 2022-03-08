@@ -13,8 +13,6 @@ RSpec.describe 'Session requests' do
 
     login_return = JSON.parse(response.body, symbolize_names: true)
 
-    binding.pry
-
     expect(response).to be_successful
 
 
