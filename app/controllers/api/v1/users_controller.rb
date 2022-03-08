@@ -8,11 +8,6 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def login
-    User.find_by(email: par)
-    # render json: UsersSerializer.user_return
-  end
-
   private
 
   def user_params
