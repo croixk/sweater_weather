@@ -12,8 +12,6 @@ RSpec.describe 'Road trip request' do
     post '/api/v1/road_trip', params: body, as: :json
     road_trip_return = JSON.parse(response.body, symbolize_names: true)
 
-    binding.pry
-
     expect(response).to be_successful
 
     expect(road_trip_return).to have_key(:data)

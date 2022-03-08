@@ -17,8 +17,14 @@ RSpec.describe 'Image API' do
     expect(image_data[:data][:attributes][:image][:credit]).to have_key(:photographer)
     expect(image_data[:data][:attributes][:image][:credit]).to have_key(:photographer_url)
     expect(image_data[:data][:attributes][:image][:credit]).to have_key(:photographer_id)
+  end
 
+  describe 'sad path' do
+    xit 'returns 404 if a location is not provided' do
+      get '/api/v1/backgrounds?location=sldkdsicx'
+      expect(response).to_not be_successful
+      expect(status).to eq(404)
 
-
+    end
   end
 end

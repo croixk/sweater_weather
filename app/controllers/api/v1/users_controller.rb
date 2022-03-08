@@ -1,7 +1,11 @@
 class Api::V1::UsersController < ApplicationController
   def create
-    user = User.create(email: params[:email], password: params[:password])
-    render json: UsersSerializer.user_return(user)
+    if params[:password] == params[:password_confirmation]
+      user = User.create(email: params[:email], password: params[:password])
+      render json: UsersSerializer.user_return(user)
+    else
+      render status: 404
+    end
   end
 
   def login
