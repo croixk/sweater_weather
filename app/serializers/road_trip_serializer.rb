@@ -11,7 +11,7 @@ class RoadTripSerializer
         end_city: destination,
           travel_time: self.travel_time(driving_time),
           weather_at_eta: {
-            temperature: 59.4,
+            temperature: (self.get_temp_at_arrival(weather_at_eta, driving_time)-273.15)*1.8+32,
             conditions: self.get_conditions_at_arrival(weather_at_eta, driving_time)
           }
         }
@@ -20,6 +20,9 @@ class RoadTripSerializer
   end
 
   def self.travel_time(driving_time)
+    if driving_time == nil
+      return 'impossible route'
+    end
     hours = driving_time.slice(0..1).to_i
     minutes = driving_time.slice(3..4).to_i
     "#{hours} hours, #{minutes} minutes"
@@ -36,26 +39,31 @@ class RoadTripSerializer
   end
 
   def self.get_conditions_at_arrival(weather_at_eta, driving_time)
+    if driving_time == nil
+      return nil
+    end
+
     hours = self.travel_time_rounded(driving_time)
 
     if hours <= 48
       return weather_at_eta[:hourly][hours.to_i][:weather][0][:main]
     else
       days = hours/24
-      # weather = weather in how many days
       return weather_at_eta[:daily][days][:weather][0][:main]
     end
 
   end
 
-  def self.get_temp_at_arrival(driving_time)
+  def self.get_temp_at_arrival(weather_at_eta, driving_time)
+    if driving_time == nil
+      return nil
+    end
     hours = self.travel_time_rounded(driving_time)
 
     if hours <= 48
       return weather_at_eta[:hourly][hours][:temp]
     else
       days = hours/24
-      # weather = weather in how many days
       return weather_at_eta[:daily][days][:temp]
     end
   end

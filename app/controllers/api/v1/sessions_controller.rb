@@ -16,10 +16,4 @@ class Api::V1::SessionsController < ApplicationController
       render json: { data: { error: 'Incorrect login credentials'}}
     end
   end
-
-  # private
-  #
-  # def user_params
-  #   params.require(:user).permit(:email, :password)
-  # end
 end

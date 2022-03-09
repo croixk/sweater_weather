@@ -8,11 +8,11 @@ class ForecastSerializer
         type: "forecast",
         attributes:{
           current_weather:{
-            datetime: data[:current][:dt],
-            sunrise: data[:current][:sunrise],
-            sunset: data[:current][:sunset],
+            datetime: Time.at(data[:current][:dt]),
+            sunrise: Time.at(data[:current][:sunrise]),
+            sunset: Time.at(data[:current][:sunset]),
             temperature: (data[:current][:temp]-273.15)*1.8+32,
-            feels_like: data[:current][:feels_like],
+            feels_like: (data[:current][:feels_like]-273.15)*1.8+32,
             humidity: data[:current][:humidity],
             uvi: data[:current][:uvi],
             visibility: data[:current][:visibility],
@@ -26,8 +26,8 @@ class ForecastSerializer
               sunset: day[:sunset],
               max_temp: (day[:temp][:max]-273.15)*1.8+32,
               min_temp: (day[:temp][:min]-273.15)*1.8+32,
-              conditions: day[:conditions],
-              icon: day[:icon]
+              conditions: day[:weather][0][:main],
+              icon: day[:weather][0][:icon]
             }
             end,
           hourly_weather: data[:hourly].shift(8).map do |hour|
