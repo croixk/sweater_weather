@@ -11,7 +11,7 @@ class RoadTripSerializer
         end_city: destination,
           travel_time: self.travel_time(driving_time),
           weather_at_eta: {
-            temperature: (self.get_temp_at_arrival(weather_at_eta, driving_time)-273.15)*1.8+32,
+            temperature: self.get_temp_at_arrival(weather_at_eta, driving_time),
             conditions: self.get_conditions_at_arrival(weather_at_eta, driving_time)
           }
         }
@@ -61,10 +61,10 @@ class RoadTripSerializer
     hours = self.travel_time_rounded(driving_time)
 
     if hours <= 48
-      return weather_at_eta[:hourly][hours][:temp]
+      return (weather_at_eta[:hourly][hours][:temp]-273.15)*1.8+32
     else
       days = hours/24
-      return weather_at_eta[:daily][days][:temp]
+      return (weather_at_eta[:daily][days][:temp]-273.15)*1.8+32
     end
   end
 end
