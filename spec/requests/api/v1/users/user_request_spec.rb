@@ -22,7 +22,7 @@ RSpec.describe 'Users' do
       expect(return_user[:data][:attributes]).to have_key(:api_key)
     end
 
-    xit 'creates a user if valid data is given' do
+    it 'creates a user if valid data is given' do
       user = {
         email: '2testemail@gmail.com',
         password: 'test_password',
@@ -31,9 +31,7 @@ RSpec.describe 'Users' do
 
       post '/api/v1/users', params: user, as: :json
 
-      return_user = JSON.parse(response.body, symbolize_names: true)
-
-      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
 
     end
   end

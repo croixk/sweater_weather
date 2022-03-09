@@ -5,7 +5,7 @@ class UsersSerializer
     hash = {
       data: {
         type: "users",
-        id: "1",
+        id: user.id,
         attributes: {
           email: user[:email],
           api_key: user[:api_key]

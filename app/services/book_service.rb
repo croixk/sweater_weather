@@ -1,6 +1,7 @@
 class BookService
   def self.conn
     Faraday.new(url: 'http://openlibrary.org') do |faraday|
+      faraday.params[:units] = 'imperial'
     end
   end
 
