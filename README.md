@@ -23,4 +23,55 @@ $ git clone git@github.com:croixk/sweater_weather.git
 
 5. Before consuming the APIs, you will need to start the local server ```$ rails s```
 
+## APIs utilized 
+This project utilizes the following public APIs - these APIs require are free, but do require registration for a key
+### Open Weather 
+https://openweathermap.org/api/one-call-api
+
+### Pexels 
+https://www.pexels.com/api/
+
+### MapQuest's Geocoding API
+https://developer.mapquest.com/documentation/geocoding-api/
+
+## Endpoints 
+This project exposes the following endpoints for a front end team
+
+### Retrieve weather for a city 
+```
+GET /api/v1/forecast?location=denver,co
+Content-Type: application/json
+Accept: application/json
+```
+
+### Background image for a city 
+```
+GET /api/v1/backgrounds?location=denver,co
+Content-Type: application/json
+Accept: application/json
+```
+
+### Register User 
+```
+POST /api/v1/users
+Content-Type: application/json
+Accept: application/json
+```
+
+### Login 
+```
+POST /api/v1/sessions
+Content-Type: application/json
+Accept: application/json
+```
+
+### Road Trip 
+```
+POST /api/v1/road_trip
+Content-Type: application/json
+Accept: application/json
+```
+
+
+
 
